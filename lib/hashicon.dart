@@ -68,7 +68,8 @@ class HashiconPainter extends CustomPainter {
       }
 
       var hue2 = (hue + variation) / 360;
-      var rgb = img.hslToRgb(hue2, saturation, lightness + light);
+      var rgb = List<int>.filled(3, 0);
+      img.hslToRgb(hue2, saturation, lightness + light, rgb);
 
       var bgPaint = Paint();
       bgPaint.color = Color.fromARGB(255, rgb[0], rgb[1], rgb[2]);
@@ -78,7 +79,7 @@ class HashiconPainter extends CustomPainter {
       if (figure[i] > 0) {
         var alpha = ((figure[i] * figureAlpha / 10) * 255).toInt();
         var hue3 = (hue + shift + variation) / 360;
-        rgb = img.hslToRgb(hue3, saturation, lightness + light);
+        img.hslToRgb(hue3, saturation, lightness + light, rgb);
 
         bgPaint.color = Color.fromARGB(alpha, rgb[0], rgb[1], rgb[2]);
         canvas.drawPath(path, bgPaint);
